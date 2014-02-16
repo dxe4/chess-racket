@@ -4,9 +4,15 @@
 
 (define target (make-bitmap 100 100)) ; A 30x30 bitmap
 (define dc (new bitmap-dc% [bitmap target]))
-(send dc set-brush (make-color 250 60 70) 'solid)
+(define cool-brush 
+  (make-brush #:color(make-color 250 60 70) #:style'solid ))
+(send dc set-brush cool-brush)
+
+(define cool-brush-2 
+  (make-brush #:color(make-color 50 100 30) #:style'solid ))
 
 (send dc draw-rectangle 0 0 100 30)
+(send dc set-brush cool-brush-2)
 (send dc draw-rectangle
       0 10   ; Top-left at (0, 10), 10 pixels down from top-left
       30 10) ; 30 pixels wide and 10 pixels high
