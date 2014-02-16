@@ -3,17 +3,32 @@
 
 (require racket/include)
 (require "cartesian_product.rkt")
+(require "common.rkt")
 
-
+;static
 (define SQUARE_SIZE 80)
-(define rook-padding-x (/  SQUARE_SIZE  13))
+(define rook-padding-x (quotient  SQUARE_SIZE  12))
 (define rook-padding-y (* rook-padding-x 2))
-
-(define rook-padding (cons rook-padding-x (cons rook-padding-y empty)))
-
+(define rook-padding 
+  (list rook-padding-x rook-padding-y))
+;-padding-x -padding-y
 (define (invert items) 
   (map (lambda (x)  (* -1 x )) items ))
-(cartesian rook-padding (invert rook-padding) )
+
+#|
+(define unique-absolute-items 
+  (lambda (x) 
+    (not(eq?(+ (car x) (cdr x)) 0))))
+
+(cartesian rook-padding (invert rook-padding))
+(filter unique-items 
+        (cartesian rook-padding (invert rook-padding) ))
+|#
+
+(cartesian (map 
+ (lambda (x) (*(car x) (cdr x)))
+ (cartesian rook-padding (list 1 -1))))
+
 
 (define target (make-bitmap 80 90)) ; A 30x30 bitmap
 
