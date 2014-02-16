@@ -1,8 +1,16 @@
-;#lang slideshow
 #lang racket 
 (require racket/draw)
 
-(define target (make-bitmap 100 100)) ; A 30x30 bitmap
+;;;;Bad design but keep it for struct reference will need soon
+;(struct _size (x y))
+;(define board-size (_size 80 80))
+;(_size-x board-size)
+(define SQUARE_SIZE 80)
+(define rook-padding-x (/  SQUARE_SIZE  13))
+(define rook-padding-y (* rook-padding-x 2))
+
+(define target (make-bitmap 80 90)) ; A 30x30 bitmap
+
 (define dc (new bitmap-dc% [bitmap target]))
 (define cool-brush 
   (make-brush #:color(make-color 250 60 70) #:style'solid ))
