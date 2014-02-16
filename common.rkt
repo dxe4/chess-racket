@@ -11,3 +11,4 @@
 
 (slice-in-two (list 1 2 3 4))
 (provide slice)
+(provide slice-in-two)
