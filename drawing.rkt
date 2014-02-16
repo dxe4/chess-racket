@@ -37,8 +37,6 @@
   ))
 
 
-
-
 (define target (make-bitmap 80 90)) ; A 30x30 bitmap
 
 (define dc (new bitmap-dc% [bitmap target]))
