@@ -6,9 +6,10 @@
       (take (drop lst (sub1 i)) (- k (sub1 i)))))
 
 (define (slice-in-two lst)
-  (cons (slice lst 1  (/ (length lst) 2)) (slice lst (+ (/ (length lst) 2) 1) (length lst))) 
-  )
+  (let ([_size (length lst)]
+        [_half_size (/ (length lst) 2)])
+  (cons (slice lst 1 _half_size) (slice lst (+ _half_size 1) _size)) 
+  ))
 
-(slice-in-two (list 1 2 3 4))
 (provide slice)
 (provide slice-in-two)
