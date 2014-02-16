@@ -1,16 +1,19 @@
 #lang racket 
 (require racket/draw)
 
-;;;;Bad design but keep it for struct reference will need soon
-;(struct _size (x y))
-;(define board-size (_size 80 80))
-;(_size-x board-size)
+(require racket/include)
+(require "cartesian_product.rkt")
+
+
 (define SQUARE_SIZE 80)
 (define rook-padding-x (/  SQUARE_SIZE  13))
 (define rook-padding-y (* rook-padding-x 2))
 
-(define foo
-  map)
+(define rook-padding (cons rook-padding-x (cons rook-padding-y empty)))
+
+(define (invert items) 
+  (map (lambda (x)  (* -1 x )) items ))
+(cartesian rook-padding (invert rook-padding) )
 
 (define target (make-bitmap 80 90)) ; A 30x30 bitmap
 

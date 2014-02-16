@@ -1,4 +1,5 @@
 #lang racket
+(provide cartesian)
 ;; say hello to our friends in stack overflow
 ;; http://stackoverflow.com/questions/1658229/scheme-lisp-nested-loops-and-recursion
 
