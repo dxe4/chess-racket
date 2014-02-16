@@ -25,9 +25,18 @@
         (cartesian rook-padding (invert rook-padding) ))
 |#
 
-(cartesian (map 
- (lambda (x) (*(car x) (cdr x)))
- (cartesian rook-padding (list 1 -1))))
+;'(6 -6 12 -12)
+(define combos
+  (map 
+   (lambda (x) (*(car x) (cdr x)))
+   (cartesian rook-padding (list 1 -1))))
+
+(define rook-points 
+  (let ([slices (slice-in-two combos)])
+  (cartesian (car slices) (cdr slices))
+  ))
+
+
 
 
 (define target (make-bitmap 80 90)) ; A 30x30 bitmap
