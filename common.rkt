@@ -20,4 +20,3 @@
 (provide slice)
 (provide slice-in-two)
 (provide unique-absolute-items)
-(provide invert-numbers)
