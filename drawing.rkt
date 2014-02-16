@@ -9,6 +9,9 @@
 (define rook-padding-x (/  SQUARE_SIZE  13))
 (define rook-padding-y (* rook-padding-x 2))
 
+(define foo
+  map)
+
 (define target (make-bitmap 80 90)) ; A 30x30 bitmap
 
 (define dc (new bitmap-dc% [bitmap target]))
