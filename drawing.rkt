@@ -11,9 +11,6 @@
 (define rook-padding-y (* rook-padding-x 2))
 (define rook-padding 
   (list rook-padding-x rook-padding-y))
-;-padding-x -padding-y
-(define (invert-numbers items) 
-  (map (lambda (x)  (* -1 x )) items ))
 
 ;'(6 -6 12 -12)
 (define combos
@@ -29,8 +26,7 @@
     ))
 
 (define (add-or-remove point)
-  (map add-or-remove-pick point)
-  )
+  (map add-or-remove-pick point))
 
 (add-or-remove (list 3 3))
 (cons (first (list 3 5)) (rest (list 3 5)) )
@@ -44,7 +40,7 @@
 (print rook-points)
 
 
-(define target (make-bitmap 80 90)) ; A 30x30 bitmap
+(define target (make-bitmap 80 80)) ; A 80x80 bitmap
 
 (define dc (new bitmap-dc% [bitmap target]))
 
@@ -80,6 +76,9 @@
       0 30   ; Start at (0, 30), the bottom-left corner
       30 0)  ; and draw to (30, 0), the top-right corner
 
+;-padding-x -padding-y
+(define (invert-numbers items) 
+  (map (lambda (x)  (* -1 x )) items ))
 
 |#
 
