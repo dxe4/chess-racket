@@ -37,6 +37,8 @@
   ))
 
 ;(map (add-or-remove rook-points)) TODO tomorrow
+(set! rook-points
+  (sort rook-points (lambda (x y) (< (cdr x) (cdr y)))))
 (print rook-points)
 
 
