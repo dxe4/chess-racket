@@ -7,10 +7,12 @@
 
 ;static
 (define SQUARE_SIZE 80)
-(define rook-padding-x (quotient  SQUARE_SIZE  12))
-(define rook-padding-y (* rook-padding-x 2))
+(define rook-bottom-box (quotient SQUARE_SIZE 10))
+(define rook-padding-x (quotient  SQUARE_SIZE  4))
+(define rook-padding-y (quotient  SQUARE_SIZE  6))
 (define rook-padding 
   (list rook-padding-x rook-padding-y))
+
 
 ;'(6 -6 12 -12)
 (define combos
@@ -61,7 +63,23 @@
 (send zee line-to 0 30)
 (send zee line-to 30 30)
 (send zee close)
-(send dc draw-path zee)
+
+(define (rook-down-path point-a point-b move-up)
+  (let ([p (new dc-path%)]
+        [x-a (first point-a)]
+        [y-a (second point-a)]
+        [x-b (first point-b)]
+        [y-b (second point-b)])
+    (send p move-to x-a y-a)
+    (send p line-to x-b y-b)
+    (send p line-to x-b (- y-b move-up))
+    (send p line-to x-a (- y-a move-up))
+    (send p close)
+    p))
+
+(define test 
+  (rook-down-path (first rook-points) (second rook-points) rook-bottom-box))
+(send dc draw-path test)
 (send target save-file "box.png" 'png)
 
 
