@@ -19,17 +19,16 @@
    (cartesian rook-padding (list 1 -1))))
 
 (define (add-or-remove-pick z)
-  (let ([add (lambda (x y) (+ x y))]
-        [remove (lambda (x y) (- x y))])
-    (cond[(negative? z) (add SQUARE_SIZE z)]
-         [else (remove SQUARE_SIZE z)])
-    ))
+    (cond[(negative? z) (+ SQUARE_SIZE z)]
+         [else (+ 0 z)]))
 
+;hack fix this
 (define (add-or-remove point)
-  (map add-or-remove-pick point))
 
-(add-or-remove (list 3 3))
-(cons (first (list 3 5)) (rest (list 3 5)) )
+  (map add-or-remove-pick (list (car point) (cdr point))))
+
+;(add-or-remove (list 3 3))
+;(cons (first (list 3 5)) (rest (list 3 5)) )
 
 (define rook-points 
   (let ([slices (slice-in-two combos)])
@@ -39,8 +38,12 @@
 ;(map (add-or-remove rook-points)) TODO tomorrow
 (set! rook-points
   (sort rook-points (lambda (x y) (< (cdr x) (cdr y)))))
-(print rook-points)
 
+
+(set! rook-points
+      (map  add-or-remove rook-points))
+
+(print rook-points)
 
 (define target (make-bitmap 80 80)) ; A 80x80 bitmap
 
