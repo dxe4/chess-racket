@@ -1,18 +1,16 @@
 #lang racket 
 (require racket/draw)
-
 (require racket/include)
 (require "cartesian_product.rkt")
 (require "common.rkt")
-
 ;static
 (define SQUARE_SIZE 80)
-(define rook-bottom-box (quotient SQUARE_SIZE 10))
+(define rook-bottom-y-box (quotient SQUARE_SIZE 10))
+(define rook-bottom-x-box (quotient SQUARE_SIZE 15))
 (define rook-padding-x (quotient  SQUARE_SIZE  4))
 (define rook-padding-y (quotient  SQUARE_SIZE  6))
 (define rook-padding 
   (list rook-padding-x rook-padding-y))
-
 
 ;'(6 -6 12 -12)
 (define combos
@@ -36,7 +34,6 @@
 (set! rook-points
   (sort rook-points (lambda (x y) (< (cdr x) (cdr y)))))
 
-
 (set! rook-points
       (map  add-or-remove rook-points))
 
@@ -47,24 +44,11 @@
 (define dc (new bitmap-dc% [bitmap target]))
 
 (define cool-brush 
-  (make-brush #:color(make-color 250 60 70) #:style'solid ))
-
-(define cool-brush-2 
-  (make-brush #:color(make-color 50 100 30) #:style'solid ))
+  (make-brush #:color(make-color 50 50 50) #:style'solid ))
 
 (send dc set-brush cool-brush)
-;(send dc set-brush cool-brush-2)
 
-;(send dc draw-rectangle 0 0 100 30)
-
-(define zee (new dc-path%))
-(send zee move-to 0 0)
-(send zee line-to 30 0)
-(send zee line-to 0 30)
-(send zee line-to 30 30)
-(send zee close)
-
-(define (rook-down-path point-a point-b move-up)
+(define (rook-down-path point-a point-b move-y move-x)
   (let ([p (new dc-path%)]
         [x-a (first point-a)]
         [y-a (second point-a)]
@@ -72,13 +56,13 @@
         [y-b (second point-b)])
     (send p move-to x-a y-a)
     (send p line-to x-b y-b)
-    (send p line-to x-b (- y-b move-up))
-    (send p line-to x-a (- y-a move-up))
+    (send p line-to x-b (- y-b move-y))
+    (send p line-to x-a (- y-a move-y))
     (send p close)
     p))
 
 (define test 
-  (rook-down-path (first rook-points) (second rook-points) rook-bottom-box))
+  (rook-down-path (first rook-points) (second rook-points) rook-bottom-y-box rook-bottom-x-box))
 (send dc draw-path test)
 (send target save-file "box.png" 'png)
 
