@@ -24,18 +24,13 @@
 
 ;hack fix this
 (define (add-or-remove point)
-
   (map add-or-remove-pick (list (car point) (cdr point))))
-
-;(add-or-remove (list 3 3))
-;(cons (first (list 3 5)) (rest (list 3 5)) )
 
 (define rook-points 
   (let ([slices (slice-in-two combos)])
   (cartesian (car slices) (cdr slices))
   ))
 
-;(map (add-or-remove rook-points)) TODO tomorrow
 (set! rook-points
   (sort rook-points (lambda (x y) (< (cdr x) (cdr y)))))
 
@@ -84,6 +79,5 @@
 ;-padding-x -padding-y
 (define (invert-numbers items) 
   (map (lambda (x)  (* -1 x )) items ))
-
 |#
 
